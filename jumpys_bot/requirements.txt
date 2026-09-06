@@ -1,0 +1,9 @@
+google-api-python-client==2.176.0
+langchain==0.3.26
+langchain-community==0.3.27
+langchain-openai==0.3.28
+openai==1.97.0
+psycopg2-binary==2.9.10
+python-dotenv==1.1.1
+requests==2.32.4
+youtube-transcript-api==1.1.1

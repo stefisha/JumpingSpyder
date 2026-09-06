@@ -6,11 +6,11 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 
 // Shared responses
 const responses = {
-  start: "*Welcome to Jumpy\\_Bot 🕷️📊*\n\n" +
-    "You're currently on the *Basic* tier.\n" +
-    "Want deeper insights with real-time sentiment analytics?\n" +
-    "✨ Upgrade to *Premium* for full access.\n\n" +
-    "🚀 Auto-trading with Jupiter & Solflare coming soon to Premium users.",
+  start: "*Hi this is Jumpy 🕷️📊*\n\n" +
+    "You're currently still in development.\n" +
+    "Want to be the first to test out Jumpy when it goes live?\n" +
+    "✨ Join our waitlist!\n\n",
+    // "🚀 Here’s the [link](https://docs.google.com/forms/d/e/1FAIpQLSet7cXEsGpPuPCr0KrLxSlZdOudLLBZNqj-TQ1mB5G4eqhkjA/viewform)",
 
   get_signals: "*📡 Get Signals*\n\n" +
     "Signal tracking activated. You’ll now receive live trading signals from curated crypto sentiment sources.\n\n" +
@@ -45,14 +45,18 @@ bot.start((ctx) => {
     reply_markup: {
       inline_keyboard: [
         [
-          { text: '📡 Get Signals', callback_data: 'get_signals' },
-          { text: '🕵️ Track Token', callback_data: 'track_token' }
+            { text: '📡 Join waitlist', url: 'https://docs.google.com/forms/d/e/1FAIpQLSet7cXEsGpPuPCr0KrLxSlZdOudLLBZNqj-TQ1mB5G4eqhkjA/viewform' },
+            { text: '🕵️ Follow us', url: 'https://x.com/jumpingspyd3r' }
         ],
-        [
-          { text: '🙋 Help', callback_data: 'help' },
-          { text: '🧪 Feedback', callback_data: 'feedback' },
-          { text: '⚙️ Settings', callback_data: 'settings' }
-        ]
+        // [
+        //   { text: '📡 Get Signals', callback_data: 'get_signals' },
+        //   { text: '🕵️ Track Token', callback_data: 'track_token' }
+        // ],
+        // [
+        //   { text: '🙋 Help', callback_data: 'help' },
+        //   { text: '🧪 Feedback', callback_data: 'feedback' },
+        //   { text: '⚙️ Settings', callback_data: 'settings' }
+        // ]
       ]
     }
   });
@@ -93,21 +97,41 @@ bot.action('settings', async (ctx) => {
   await ctx.editMessageText(responses.settings, { parse_mode: 'Markdown' });
 });
 
-// Public key command
+// /subscribe command
 bot.command('subscribe', async (ctx) => {
   const userId = ctx.from.id;
   const publicKey = getPublicKeyForUserId(userId);
   const balance = await checkBalance(publicKey);
   if (balance > 0.00001) {
     ctx.reply(`You are subscribed! You have ${balance} SOL on your public key: ${publicKey}`);
-  }
-  else {
+  } else {
     ctx.reply(`You are not subscribed! \nPlease top up your account with 0.01 SOL on your public key: ${publicKey}`);
   }
 });
 
+// subscribe action (for inline button)
+bot.action('subscribe', async (ctx) => {
+  const userId = ctx.from.id;
+  const publicKey = getPublicKeyForUserId(userId);
+  const balance = await checkBalance(publicKey);
+  if (balance > 0.00001) {
+    await ctx.answerCbQuery();
+    await ctx.editMessageText(`You are subscribed! You have ${balance} SOL on your public key: ${publicKey}`);
+  } else {
+    await ctx.answerCbQuery();
+    await ctx.editMessageText(`You are not subscribed! \nPlease top up your account with 0.01 SOL on your public key: ${publicKey}`);
+  }
+});
+
+// /stop command
 bot.command('stop', (ctx) => {
   ctx.reply('🚫 You have stopped receiving signals and notifications. You can /start again anytime.');
+});
+
+// stop action (for inline button)
+bot.action('stop', async (ctx) => {
+  await ctx.answerCbQuery();
+  await ctx.editMessageText('🚫 You have stopped receiving signals and notifications. You can /start again anytime.');
 });
 
 // Fallback
