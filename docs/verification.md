@@ -13,7 +13,7 @@ Run `make check` with the project environment active:
 
 Run `make package` to build the source distribution and wheel. The package smoke script installs the wheel into a separate virtual environment and working directory, with no `PYTHONPATH` pointing at the checkout and no dependency downloads. It checks the CLI entry point, module entry point, bundled demo fixtures, HTML template, eight rendered cards, and 24-case evaluation. The wheel excludes archives, credentials, and runtime databases.
 
-CI runs the suite and package smoke check on Ubuntu with Python 3.9 and 3.13, and compares the freshly generated baseline with the committed result. Local verification used Python 3.9 on macOS. Live provider access, quotas, model availability, and server behavior remain outside the mock tests.
+CI runs the suite and package smoke check on Ubuntu 22.04 with Python 3.9 and 3.13, and compares the freshly generated baseline with the committed result. Local verification used Python 3.9 on macOS. Live provider access, quotas, model availability, and server behavior remain outside the mock tests.
 
 ## Manual browser checks
 
