@@ -14,6 +14,6 @@ build/
 dist/
 *.egg-info/
 .ruff_cache/
-data/
-reports/
+/data/
+/reports/
 .coverage
