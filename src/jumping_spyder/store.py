@@ -10,7 +10,7 @@ from .domain import Classification, Post
 
 class Store:
     def __init__(self, path):
-        self.path = Path(path)
+        self.path = Path(path).resolve()
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.conn = sqlite3.connect(str(self.path), timeout=5)
         if self.conn.execute("PRAGMA user_version").fetchone()[0] not in (0, 1):

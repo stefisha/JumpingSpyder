@@ -47,7 +47,7 @@ Classifications are reused across destinations and CLI runs. Selecting a new mod
 
 GET requests retry transient errors with bounded backoff. POST requests are attempted once per processing run. Their result can be ambiguous after a connection failure, so there is no immediate blind replay. Telegram delivery is **at least once**: a crash between remote acceptance and local acknowledgment can lead to a duplicate on the next run. It is not an exactly-once distributed transaction.
 
-An advisory OS lock prevents two cooperating CLI processes from using the same database at once, and is automatically released on process exit. The database should live on a local filesystem; do not use a shared network drive, multiple independent database copies for the same destination, or a worker that bypasses the lock. External callers of `process_pending` must hold `Store.lock()` themselves.
+The database path is resolved before opening it and deriving its advisory lock, so file symlink aliases share the same lock. That lock prevents two cooperating CLI processes from using the same database at once, and is automatically released on process exit. The database should live on a local filesystem; do not use a shared network drive, multiple independent database copies for the same destination, or a worker that bypasses the lock. External callers of `process_pending` must hold `Store.lock()` themselves.
 
 ## Collection boundary
 

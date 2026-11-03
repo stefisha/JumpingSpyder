@@ -171,3 +171,69 @@ class CLITests(unittest.TestCase):
             code = main(["ingest", "--input", str(fixture), "--database", str(self.root / "db")])
         self.assertEqual(code, 1)
         self.assertIn("six documented source fields", output.getvalue())
+
+    def test_malformed_evaluation_cases_fail_cleanly_before_classification(self):
+        import json
+
+        valid = {"id": "valid", "text": "Bullish", "label": "BULLISH", "risk_flagged": False}
+        malformed = [
+            {},
+            None,
+            "not a case",
+            {**valid, "id": []},
+            {**valid, "id": 1},
+            {**valid, "id": ""},
+            {**valid, "text": False},
+            {**valid, "label": "BUY"},
+            {**valid, "risk_flagged": "false"},
+            {**valid, "extra": True},
+        ]
+        documents = [
+            {},
+            None,
+            "not a list",
+            [],
+            [valid, valid],
+            *[[valid, case] for case in malformed],
+        ]
+        for document in documents:
+            with self.subTest(document=document):
+                fixture = self.root / "bad-evaluation.json"
+                fixture.write_text(json.dumps(document))
+                with (
+                    contextlib.redirect_stdout(io.StringIO()) as output,
+                    patch.object(RuleClassifier, "classify") as classify,
+                ):
+                    self.assertEqual(
+                        main(
+                            [
+                                "evaluate",
+                                "--input",
+                                str(fixture),
+                                "--output",
+                                str(self.root / "metrics.json"),
+                            ]
+                        ),
+                        1,
+                    )
+                classify.assert_not_called()
+                self.assertIn("Error:", output.getvalue())
+                self.assertFalse((self.root / "metrics.json").exists())
+
+    def test_report_preserves_pending_delivery_state_on_classified_cards(self):
+        from test_pipeline import Sink
+
+        store = Store(self.root / "db")
+        sink = Sink(fail=True)
+        try:
+            store.ingest([post()])
+            process_pending(store, RuleClassifier(), sink)
+            target = render_report(store, sink.destination, self.root / "pending.html")
+            html = target.read_text()
+            self.assertTrue(
+                'data-label="BULLISH" data-state="pending"' in html,
+                "Classified retry card must carry its pending delivery state",
+            )
+            self.assertIn("delivery_failed", html)
+        finally:
+            store.close()

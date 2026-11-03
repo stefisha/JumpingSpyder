@@ -562,7 +562,12 @@
           let count = 0;
           for (const card of cards) {
             card.hidden =
-              !(filter === "ALL" || card.dataset.label === filter) ||
+              !(
+                filter === "ALL" ||
+                (filter === "PENDING"
+                  ? card.dataset.state === "pending"
+                  : card.dataset.label === filter)
+              ) ||
               !card.textContent
                 .toLowerCase()
                 .includes(search.value.toLowerCase());

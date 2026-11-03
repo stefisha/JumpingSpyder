@@ -32,7 +32,7 @@ def render_report(store, destination, output, mode="Local review"):
         failure = (
             '<span class="error">Retry pending · ' + escape(error) + "</span>" if error else ""
         )
-        cards.append(f'''<article class="card" data-label="{label}">
+        cards.append(f'''<article class="card" data-label="{label}" data-state="{state}">
           <div class="card-top"><span class="source">{escape(post.source)} / {escape(post.author)}</span>
           <span class="tag {label.lower()}">{label}</span></div>
           <h3>{escape(summary)}</h3><blockquote>{escape(excerpt)}</blockquote>

@@ -3,26 +3,40 @@
 import hashlib
 import json
 from pathlib import Path
+from urllib.parse import quote
 
-from .domain import LABELS, Post
+from .domain import LABELS, Post, bounded
 
 
 def evaluate(path, classifier, output):
     raw = Path(path).read_bytes()
     cases = json.loads(raw)
-    if not cases or len({c["id"] for c in cases}) != len(cases):
-        raise ValueError("Evaluation cases must be nonempty with unique IDs")
+    if not isinstance(cases, list) or not cases or len(cases) > 10000:
+        raise ValueError("Evaluation input must be a nonempty list of at most 10000 cases")
+    seen = set()
+    fields = {"id", "text", "label", "risk_flagged"}
+    # Validate the entire dataset before any classifier can run or incur provider usage.
+    for case in cases:
+        if not isinstance(case, dict) or set(case) != fields:
+            raise ValueError(
+                "Each evaluation case must contain exactly id, text, label, risk_flagged"
+            )
+        bounded(case["id"], "evaluation ID", 200)
+        bounded(case["text"], "evaluation text", 20000)
+        if case["label"] not in LABELS or type(case["risk_flagged"]) is not bool:
+            raise ValueError("Invalid evaluation annotation")
+        if case["id"] in seen:
+            raise ValueError("Evaluation case IDs must be unique")
+        seen.add(case["id"])
     matrix = {actual: {predicted: 0 for predicted in LABELS} for actual in LABELS}
     results = []
     for case in cases:
-        if case["label"] not in LABELS or type(case["risk_flagged"]) is not bool:
-            raise ValueError("Invalid evaluation annotation")
         post = Post(
             "fixture",
             case["id"],
             "synthetic-evaluation",
             case["text"],
-            "https://example.com/evaluation/" + case["id"],
+            "https://example.com/evaluation/" + quote(case["id"], safe=""),
             "2026-01-01T00:00:00Z",
         )
         result = classifier.classify(post)

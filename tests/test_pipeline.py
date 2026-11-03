@@ -176,3 +176,16 @@ class PipelineTests(unittest.TestCase):
         process_pending(self.store, Broken(), self.sink, 1)
         process_pending(self.store, self.classifier, self.sink, 1)
         self.assertEqual(self.sink.messages, ["fixture:2"])
+
+    def test_database_file_symlink_shares_the_worker_lock(self):
+        alias = Path(self.temp.name) / "alias.sqlite3"
+        alias.symlink_to(self.path)
+        other = Store(alias)
+        try:
+            self.assertEqual(self.store.path, other.path)
+            with self.store.lock():
+                with self.assertRaises(RuntimeError):
+                    with other.lock():
+                        self.fail("Symlink alias bypassed the active database lock")
+        finally:
+            other.close()

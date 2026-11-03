@@ -6,7 +6,7 @@ The rebuild is verified as an offline application with mocked provider contracts
 
 Run `make check` with the project environment active:
 
-- **39 unittest regressions** cover all unseen posts, source-qualified identities, duplicate ingestion, chronological processing across timezones, durable failed-delivery retries after restart, cached classification reuse, per-destination state, suppression rules, malformed model/fixture input, unsupported schema versions, and concurrent worker locking.
+- **43 unittest regressions** cover all unseen posts, source-qualified identities, duplicate ingestion, chronological processing across timezones, durable failed-delivery retries after restart, cached classification reuse, per-destination state, suppression rules, malformed model/fixture input, unsupported schema versions, concurrent worker locking through real and symlinked database paths, case-insensitive X account syncing, malformed evaluation datasets, and pending delivery state.
 - Adapter tests inspect pagination, collection cutoffs, page-limit refusal, X partial errors, OpenAI JSON Schema requests, refusal/truncation handling, Telegram acknowledgment, plain-text formatting, HTTP retry bounds, and redacted failure messages.
 - Report/CLI tests cover HTML escaping, literal environment loading, missing configuration, reproducible metrics, empty reports, demo idempotency, and a mocked preview-to-Telegram journey.
 - Ruff checks maintained Python source, tests, and scripts. Archived prototype code is excluded from supported-runtime checks.
@@ -23,6 +23,7 @@ The generated report was inspected at desktop size and a 390 px phone viewport:
 - Stance filtering shows four BULLISH cards out of eight unique sources.
 - Text search narrows results to the matching source; a nonmatching search shows an explicit empty state.
 - Complete-source disclosure opens independently of the evidence excerpt.
+- The Pending filter shows both an unclassified item and a classified failed-delivery retry; stance filtering and combined search still work.
 - The mobile document has a 390 px scroll width at a 390 px viewport, with one card per row.
 - Filters and search are native keyboard-focusable controls. No decorative animation requires a motion setting.
 

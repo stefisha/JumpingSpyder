@@ -36,7 +36,7 @@ The maintained app does not use the old archive's `DATABASE_URL`, mnemonic, `TRA
 ]
 ```
 
-Allowed sources are `fixture`, `x`, and `youtube`. IDs and authors are nonempty strings up to 200 characters; source text is nonempty and at most 20,000 characters. URLs must be absolute HTTPS URLs without embedded credentials and at most 2,000 characters. Timestamps must include a timezone. IDs must remain stable across polling runs; a source ID with changed content is rejected for reconciliation.
+Allowed sources are `fixture`, `x`, and `youtube`. IDs and authors are nonempty strings up to 200 characters; source text is nonempty and at most 20,000 characters. URLs must be absolute HTTPS URLs without embedded credentials and at most 2,000 characters. Timestamps must include a timezone. X usernames are normalized to lowercase before constructing source records. IDs must remain stable across polling runs; a source ID with changed content is rejected for reconciliation.
 
 The text sent to the classifier is the complete stored text. `evidence` is limited to 600 characters and must be an exact substring; `summary` is limited to 600 characters. Invalid output stays pending rather than becoming an alert. API credentials never belong in source JSON.
 

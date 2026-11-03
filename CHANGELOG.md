@@ -2,6 +2,7 @@
 
 ## 0.2.0 — 2026-11-04
 
+- Validate entire evaluation datasets before classification; normalize X username casing; share worker locks across symlinked database paths; filter pending reviews by delivery state.
 - Establish one maintained Python package with a CLI and zero third-party runtime dependencies.
 - Move the recovered Node/Python/n8n prototypes to a documented archive.
 - Add paginated, bounded X and YouTube metadata collectors with canonical identifiers.

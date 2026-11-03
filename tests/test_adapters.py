@@ -181,3 +181,25 @@ class AdapterTests(unittest.TestCase):
             XSource(None, "token", "../users")
         with self.assertRaises(ValueError):
             YouTubeSource(None, "token", "ambiguous display name")
+
+    def test_case_variant_x_accounts_do_not_roll_back_new_posts(self):
+        import tempfile
+        from pathlib import Path
+
+        from jumping_spyder.store import Store
+
+        first = {"id": "1", "text": "Bullish", "created_at": "2026-01-01T00:00:00Z"}
+        second = {"id": "2", "text": "Bearish", "created_at": "2026-01-01T01:00:00Z"}
+
+        def source(username, tweets):
+            http = FakeHTTP([{"data": {"id": "42"}}, {"data": tweets}])
+            return XSource(http, "token", username).fetch()
+
+        with tempfile.TemporaryDirectory() as temp:
+            store = Store(Path(temp) / "db")
+            try:
+                self.assertEqual(store.ingest(source("example", [first])), 1)
+                self.assertEqual(store.ingest(source("Example", [second, first])), 1)
+                self.assertEqual(len(store.records("review")), 2)
+            finally:
+                store.close()

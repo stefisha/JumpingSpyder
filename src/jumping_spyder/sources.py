@@ -30,7 +30,7 @@ class XSource:
     def __init__(self, http, bearer, username, pages=3, since=None):
         if not re.fullmatch(r"[A-Za-z0-9_]{1,15}", username):
             raise ValueError("Invalid X username")
-        self.http, self.bearer, self.username, self.pages = http, bearer, username, pages
+        self.http, self.bearer, self.username, self.pages = http, bearer, username.lower(), pages
         self.since = since
 
     def fetch(self):
