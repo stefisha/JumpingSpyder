@@ -3,8 +3,8 @@
   "nodes": [
     {
       "parameters": {
-        "chatId": "2028633531",
-        "text": "=📈 New Trading Signal Detected 📈\n\nFrom: @{{ $vars.account }}  \nSignal: {{ $json.signal == \"BUY\" ? \"🟢 BUY\" : \"🔴 SELL\" }}  \nTweet: \"{{ $json.tweet }}\"\nReason: {{ $json.reason }}",
+        "chatId": "={{ $env.TELEGRAM_CHAT_ID }}",
+        "text": "=\ud83d\udcc8 New Trading Signal Detected \ud83d\udcc8\n\nFrom: @{{ $vars.account }}  \nSignal: {{ $json.signal == \"BUY\" ? \"\ud83d\udfe2 BUY\" : \"\ud83d\udd34 SELL\" }}  \nTweet: \"{{ $json.tweet }}\"\nReason: {{ $json.reason }}",
         "additionalFields": {
           "parse_mode": "HTML"
         }
@@ -16,14 +16,7 @@
         -140,
         -160
       ],
-      "id": "3bead402-c58d-4041-a8df-41647e59709b",
-      "webhookId": "2060880a-554a-4cd7-9984-84190b06b3f0",
-      "credentials": {
-        "telegramApi": {
-          "id": "lL1UlSgHq1WBmHWX",
-          "name": "Telegram account"
-        }
-      }
+      "id": "3bead402-c58d-4041-a8df-41647e59709b"
     },
     {
       "parameters": {
@@ -63,13 +56,7 @@
         -460
       ],
       "id": "1d29295c-75e0-43c0-89bf-dc0c3f96a1da",
-      "name": "X",
-      "credentials": {
-        "twitterOAuth2Api": {
-          "id": "YnPESMeOFQYchtLO",
-          "name": "X account"
-        }
-      }
+      "name": "X"
     },
     {
       "parameters": {
@@ -86,7 +73,7 @@
               "role": "system"
             },
             {
-              "content": "=Tweet: \"{{ $json.text }}\"\n\nIs this a scam or trading signal? Respond in JSON format:\n\n{\n  \"tweet\": \"...original tweet text...\",\n  \"scam\": true|false,\n  \"signal\": \"BUY\" | \"SELL\" | \"IGNORE\",\n  \"reason\": \"Brief, punchy explanation (1–2 sentences max). Focus on sentiment or signal logic. Assume I am a trader.\"\n}\n"
+              "content": "=Tweet: \"{{ $json.text }}\"\n\nIs this a scam or trading signal? Respond in JSON format:\n\n{\n  \"tweet\": \"...original tweet text...\",\n  \"scam\": true|false,\n  \"signal\": \"BUY\" | \"SELL\" | \"IGNORE\",\n  \"reason\": \"Brief, punchy explanation (1\u20132 sentences max). Focus on sentiment or signal logic. Assume I am a trader.\"\n}\n"
             }
           ]
         },
@@ -99,13 +86,7 @@
         -460
       ],
       "id": "861fbc44-cb66-44cb-919a-728d192aae04",
-      "name": "OpenAI",
-      "credentials": {
-        "openAiApi": {
-          "id": "jLIbgGoPRjEUIVZE",
-          "name": "OpenAi account"
-        }
-      }
+      "name": "OpenAI"
     },
     {
       "parameters": {
@@ -168,8 +149,8 @@
     },
     {
       "parameters": {
-        "chatId": "2028633531",
-        "text": "=⚠️ False Signal Ignored (Debug Only) ⚠️\n\nFrom: @{{ $vars.account }}\nTweet: \"{{ $json.tweet }}\"\nReason: {{ $json.reason }}\n",
+        "chatId": "={{ $env.TELEGRAM_CHAT_ID }}",
+        "text": "=\u26a0\ufe0f False Signal Ignored (Debug Only) \u26a0\ufe0f\n\nFrom: @{{ $vars.account }}\nTweet: \"{{ $json.tweet }}\"\nReason: {{ $json.reason }}\n",
         "additionalFields": {
           "parse_mode": "HTML"
         }
@@ -181,18 +162,11 @@
         -220,
         20
       ],
-      "id": "7d35eadd-0ec9-4bd4-bcb3-7f51bd3aec7e",
-      "webhookId": "2060880a-554a-4cd7-9984-84190b06b3f0",
-      "credentials": {
-        "telegramApi": {
-          "id": "lL1UlSgHq1WBmHWX",
-          "name": "Telegram account"
-        }
-      }
+      "id": "7d35eadd-0ec9-4bd4-bcb3-7f51bd3aec7e"
     },
     {
       "parameters": {
-        "jsCode": "return [\n  {\n  \"created_at\": \"2025-05-06T21:17:04.000Z\",\n  \"text\": \"I'm feeling bullish on DOGE 🐶\",\n  \"id\": \"1919864010494599218\",\n  \"edit_history_tweet_ids\": [\n    \"1919864010494599218\"\n  ]\n}\n];\n"
+        "jsCode": "return [\n  {\n  \"created_at\": \"2025-05-06T21:17:04.000Z\",\n  \"text\": \"I'm feeling bullish on DOGE \ud83d\udc36\",\n  \"id\": \"1919864010494599218\",\n  \"edit_history_tweet_ids\": [\n    \"1919864010494599218\"\n  ]\n}\n];\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -218,13 +192,6 @@
       ],
       "id": "0ce54275-fb43-4b56-bd5d-9d5a11ebb63c",
       "name": "Telegram Trigger",
-      "webhookId": "fdbb0a7b-360a-4ca8-8cba-3563a8092534",
-      "credentials": {
-        "telegramApi": {
-          "id": "lL1UlSgHq1WBmHWX",
-          "name": "Telegram account"
-        }
-      },
       "disabled": true
     },
     {
@@ -264,7 +231,7 @@
     {
       "parameters": {
         "chatId": "={{ $json.message.chat.id }}",
-        "text": "Bot started ✅\\nUse /set @username to follow someone.",
+        "text": "Bot started \u2705\\nUse /set @username to follow someone.",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.telegram",
@@ -275,13 +242,6 @@
       ],
       "id": "200bd041-0f2d-4a00-9129-036845a27561",
       "name": "Telegram",
-      "webhookId": "e9d557d7-e313-41dc-8f39-7403d3051564",
-      "credentials": {
-        "telegramApi": {
-          "id": "lL1UlSgHq1WBmHWX",
-          "name": "Telegram account"
-        }
-      },
       "disabled": true
     }
   ],
@@ -402,11 +362,5 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "26ada656-d612-47f0-bfd6-d6817a2db35f",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "6c8e2a7656ee07ba410ff2808aeba64a6bbbf5511c103cccf06f745d2deac19d"
-  },
-  "id": "xlUVXIcTCFXUgBCq",
   "tags": []
 }

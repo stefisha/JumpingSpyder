@@ -1,0 +1,28 @@
+name: Checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    # Python 3.9 is unavailable on Ubuntu 26.04; keep the compatibility lane reproducible.
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.9", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pip install -e . --no-build-isolation
+      - run: make check
+      - run: make package
+      - name: Verify committed baseline matches reproducible evaluation
+        run: |
+          jumping-spyder evaluate --output reports/current-baseline.json
+          python -c "import json; from pathlib import Path; assert json.loads(Path('docs/results/baseline.json').read_text()) == json.loads(Path('reports/current-baseline.json').read_text())"

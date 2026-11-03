@@ -1,0 +1,5 @@
+include README.md LICENSE CHANGELOG.md CONTRIBUTING.md Makefile requirements-dev.txt .env.example
+recursive-include examples *.json
+recursive-include docs *.md *.json *.png
+recursive-include scripts *.py
+recursive-include tests *.py
