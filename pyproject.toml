@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=77,<82"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jumping-spyder"
+version = "0.2.0"
+description = "Evidence-linked social content classification with durable delivery and an offline review demo"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Stefan Veličković"}]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/stefisha/JumpingSpyder"
+Issues = "https://github.com/stefisha/JumpingSpyder/issues"
+
+[project.scripts]
+jumping-spyder = "jumping_spyder.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+jumping_spyder = ["data/*.json", "templates/*"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]

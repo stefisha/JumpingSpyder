@@ -1,0 +1,18 @@
+[
+  {
+    "source": "fixture",
+    "id": "001",
+    "author": "field_notes",
+    "text": "I am bullish on SOL after reading the release notes. Still watching execution risk.",
+    "url": "https://example.com/jumpy/001",
+    "published_at": "2026-01-15T09:00:00Z"
+  },
+  {
+    "source": "fixture",
+    "id": "002",
+    "author": "market_journal",
+    "text": "Reducing my ETH exposure ahead of the event; this is my positioning, not a forecast.",
+    "url": "https://example.com/jumpy/002",
+    "published_at": "2026-01-15T09:10:00Z"
+  }
+]
