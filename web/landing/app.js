@@ -1,4 +1,4 @@
-"use strict";
+import { observeVisibility } from "./motion.mjs";
 const menuToggle = document.querySelector(".menu-toggle");
 const mobileNav = document.getElementById("mobile-nav");
 function setMenu(open) {
@@ -62,7 +62,7 @@ function springFrames(
   }
   return frames;
 }
-function spring(element, frame, delay = 0, settings = {}) {
+function spring(element, frame, delay = 0, settings = {}, paused = false) {
   if (reducedMotion.matches) return;
   const animation = element.animate(springFrames(frame, null, settings), {
     duration: 1800,
@@ -70,6 +70,10 @@ function spring(element, frame, delay = 0, settings = {}) {
     fill: "both",
     easing: "linear",
   });
+  if (paused) {
+    animation.pause();
+    animation.currentTime = 0;
+  }
   runningAnimations.add(animation);
   animation.finished
     .then(() => runningAnimations.delete(animation))
@@ -88,65 +92,65 @@ spring(
 );
 
 const phoneTilt = document.querySelector(".phone-tilt");
-let phoneAnimation;
-const phoneObserver = new IntersectionObserver(
-  (entries) => {
-    for (const entry of entries) {
-      phoneAnimation?.cancel();
-      if (reducedMotion.matches) continue;
-      const start = entry.isIntersecting ? 30 : 0;
-      const end = entry.isIntersecting ? 0 : 30;
-      phoneAnimation = spring(
-        phoneTilt,
-        (p) => ({
-          transform: `perspective(1200px) rotateX(${start + (end - start) * p}deg)`,
-        }),
-        0,
-        { stiffness: 200, damping: 60, mass: 1.2 },
-      );
-    }
-  },
-  { threshold: 0.5 },
+const phoneScene = document.querySelector(".phone-scene");
+const phoneAnimation = spring(
+  phoneTilt,
+  (p) => ({
+    transform: `perspective(1200px) rotateX(${30 * (1 - p)}deg)`,
+  }),
+  0,
+  { stiffness: 200, damping: 60, mass: 1.2 },
+  true,
 );
-phoneObserver.observe(phoneTilt);
+observeVisibility(phoneScene, (visible) => {
+  if (reducedMotion.matches || !phoneAnimation) return;
+  // Reverse from the current frame instead of snapping to an endpoint.
+  phoneAnimation.playbackRate = visible ? 1 : -1;
+  phoneAnimation.play();
+});
 
-const stepObserver = new IntersectionObserver(
-  (entries) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      spring(
-        entry.target,
-        (p) => ({ opacity: p, transform: `translateY(${50 * (1 - p)}px)` }),
-        200,
-      );
-      stepObserver.unobserve(entry.target);
+document.querySelectorAll(".step").forEach((step) => {
+  const animation = spring(
+    step,
+    (p) => ({
+      opacity: p,
+      transform: `translateY(${50 * (1 - p)}px)`,
+    }),
+    200,
+    {},
+    true,
+  );
+  observeVisibility(
+    step.parentElement,
+    (visible) => {
+      if (visible && !reducedMotion.matches) animation?.play();
+    },
+    { once: true },
+  );
+});
+const coinAnimation = spring(
+  document.querySelector(".solana-coin"),
+  (p) => ({
+    opacity: p,
+    transform: `translateY(${50 * (1 - p)}px) rotate(-4deg)`,
+  }),
+  1000,
+  {},
+  true,
+);
+observeVisibility(
+  phoneScene,
+  (visible) => {
+    if (reducedMotion.matches || !coinAnimation) return;
+    if (visible) coinAnimation.play();
+    else {
+      // Reset only after the stationary scene has fully left the viewport.
+      coinAnimation.pause();
+      coinAnimation.currentTime = 0;
     }
   },
-  { threshold: 0.5 },
+  { exitThreshold: 0 },
 );
-document
-  .querySelectorAll(".step")
-  .forEach((step) => stepObserver.observe(step));
-let coinAnimation;
-const coinObserver = new IntersectionObserver(
-  (entries) => {
-    for (const entry of entries) {
-      coinAnimation?.cancel();
-      if (entry.isIntersecting) {
-        coinAnimation = spring(
-          entry.target,
-          (p) => ({
-            opacity: p,
-            transform: `translateY(${50 * (1 - p)}px) rotate(-4deg)`,
-          }),
-          1000,
-        );
-      }
-    }
-  },
-  { threshold: 0.5 },
-);
-coinObserver.observe(document.querySelector(".solana-coin"));
 
 function sizePartnerLoop() {
   // The original ticker's speed is 60px/s, independent of viewport width.
@@ -201,4 +205,17 @@ document.querySelectorAll(".faq-list details").forEach((details) => {
       faqAnimations.delete(details);
     };
   });
+});
+
+const tickerPause = document.querySelector(".ticker-pause");
+const partnerTrack = document.querySelector(".partner-track");
+tickerPause.addEventListener("click", () => {
+  const paused = tickerPause.getAttribute("aria-pressed") !== "true";
+  tickerPause.setAttribute("aria-pressed", String(paused));
+  tickerPause.setAttribute(
+    "aria-label",
+    paused ? "Resume partner animation" : "Pause partner animation",
+  );
+  tickerPause.textContent = paused ? "▶" : "Ⅱ";
+  partnerTrack.dataset.paused = String(paused);
 });

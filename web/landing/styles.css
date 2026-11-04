@@ -1509,5 +1509,50 @@ h2,
     padding: 50px 20px 80px;
   }
 }
-@media (min-width: 1368px) { .solana-coin { width: 170px; left: calc(50% + 64px); right: auto; top: calc(44.2857% - 85px); } }
-@media (min-width: 810px) and (max-width: 1367px) { .solana-coin { width: 170px; left: calc(50% - 35px); right: auto; top: calc(44.8065% - 85px); } }
+@media (min-width: 1368px) {
+  .solana-coin {
+    width: 170px;
+    left: calc(50% + 64px);
+    right: auto;
+    top: calc(44.2857% - 85px);
+  }
+}
+@media (min-width: 810px) and (max-width: 1367px) {
+  .solana-coin {
+    width: 170px;
+    left: calc(50% - 35px);
+    right: auto;
+    top: calc(44.8065% - 85px);
+  }
+}
+
+.faq-list summary:focus-visible {
+  outline-offset: -4px;
+  border-radius: 12px;
+}
+.partners {
+  position: relative;
+}
+.ticker-pause {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+.partner-track[data-paused="true"] {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-pause {
+    display: none;
+  }
+}

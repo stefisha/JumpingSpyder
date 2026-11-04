@@ -11,7 +11,7 @@
     />
     <link rel="icon" type="image/png" href="assets/jumpy.png" />
     <link rel="stylesheet" href="styles.css" />
-    <script defer src="app.js"></script>
+    <script type="module" src="app.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -91,17 +91,35 @@
             fetchpriority="high"
           /><img
             class="hero-phone-layer"
-            src="assets/jumpy-phone.png"
+            src="assets/jumpy-phone-480.webp"
+            srcset="
+              assets/jumpy-phone-480.webp 480w,
+              assets/jumpy-phone-960.webp 960w
+            "
+            sizes="(max-width: 809px) 40vw, 331px"
             alt="Jumpy Telegram bot concept"
           /><img
             class="hero-card-layer"
-            src="assets/solflare-card-cutout.png"
+            src="assets/solflare-card-cutout-480.webp"
+            srcset="
+              assets/solflare-card-cutout-480.webp 480w,
+              assets/solflare-card-cutout-960.webp 960w
+            "
+            sizes="(max-width: 700px) 49vw, 310px"
             alt="Solflare card concept"
           />
         </div>
       </section>
       <section class="partners container" aria-label="Partners">
         <p>Special thanks to our <span class="green">partners</span></p>
+        <button
+          class="ticker-pause"
+          type="button"
+          aria-label="Pause partner animation"
+          aria-pressed="false"
+        >
+          Ⅱ
+        </button>
         <div class="partner-window">
           <div class="partner-track">
             <div class="partner-group">
@@ -213,36 +231,46 @@
         </div>
         <div class="how-grid">
           <div class="steps-left">
-            <article class="step">
-              <span class="step-icon"
-                ><img src="assets/sniff.svg" alt=""
-              /></span>
-              <div>
-                <h3>Sniff</h3>
-                <p>
-                  JS scrapes X for dev leaks, influencer hints, and shady anon
-                  chatter.
-                </p>
-              </div>
-            </article>
-            <article class="step">
-              <span class="step-icon"
-                ><img src="assets/filter.svg" alt=""
-              /></span>
-              <div>
-                <h3>Filter</h3>
-                <p>
-                  AI removes the noise. Only worthwhile signals make it through.
-                </p>
-              </div>
-            </article>
+            <div class="step-trigger">
+              <article class="step">
+                <span class="step-icon"
+                  ><img src="assets/sniff.svg" alt=""
+                /></span>
+                <div>
+                  <h3>Sniff</h3>
+                  <p>
+                    JS scrapes X for dev leaks, influencer hints, and shady anon
+                    chatter.
+                  </p>
+                </div>
+              </article>
+            </div>
+            <div class="step-trigger">
+              <article class="step">
+                <span class="step-icon"
+                  ><img src="assets/filter.svg" alt=""
+                /></span>
+                <div>
+                  <h3>Filter</h3>
+                  <p>
+                    AI removes the noise. Only worthwhile signals make it
+                    through.
+                  </p>
+                </div>
+              </article>
+            </div>
           </div>
           <div class="phone-scene">
             <img class="orbit-art" src="assets/orbit.svg" alt="" />
             <div class="phone-tilt">
               <img
                 class="how-phone"
-                src="assets/jumpy-phone.png"
+                src="assets/jumpy-phone-480.webp"
+                srcset="
+                  assets/jumpy-phone-480.webp 480w,
+                  assets/jumpy-phone-960.webp 960w
+                "
+                sizes="(max-width: 809px) 149px, (max-width: 1367px) 240px, 331px"
                 alt="Jumpy Telegram bot with an example signal and controls"
               /><img
                 class="solana-coin"
@@ -252,29 +280,34 @@
             </div>
           </div>
           <div class="steps-right">
-            <article class="step">
-              <span class="step-icon"
-                ><img src="assets/alert.svg" alt=""
-              /></span>
-              <div>
-                <h3>Alert</h3>
-                <p>
-                  Telegram pings with real-time alpha you can act on. You ape in
-                  — or pull out — before CT notices.
-                </p>
-              </div>
-            </article>
-            <article class="step">
-              <span class="step-icon"
-                ><img src="assets/profit.svg" alt=""
-              /></span>
-              <div>
-                <h3>Profit</h3>
-                <p>
-                  You’re not chasing pumps. You’re already out with bags packed.
-                </p>
-              </div>
-            </article>
+            <div class="step-trigger">
+              <article class="step">
+                <span class="step-icon"
+                  ><img src="assets/alert.svg" alt=""
+                /></span>
+                <div>
+                  <h3>Alert</h3>
+                  <p>
+                    Telegram pings with real-time alpha you can act on. You ape
+                    in — or pull out — before CT notices.
+                  </p>
+                </div>
+              </article>
+            </div>
+            <div class="step-trigger">
+              <article class="step">
+                <span class="step-icon"
+                  ><img src="assets/profit.svg" alt=""
+                /></span>
+                <div>
+                  <h3>Profit</h3>
+                  <p>
+                    You’re not chasing pumps. You’re already out with bags
+                    packed.
+                  </p>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
