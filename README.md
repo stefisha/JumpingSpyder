@@ -1,20 +1,38 @@
 <p align="center"><img src="docs/assets/banner.png" alt="JumpingSpyder — green pixel spider against a dark market-chart backdrop" width="100%"></p>
 
 <h1 align="center">JumpingSpyder</h1>
-<p align="center"><strong>Catch the stance. Keep the context.</strong><br>Source-linked social content classification, durable processing, and an inspectable review desk.</p>
+<p align="center"><strong>When X Talks, We Already Know.</strong><br>Social monitoring, filtered Telegram alerts, and the original JumpingSpyder landing page.</p>
 <p align="center">
   <a href="https://github.com/stefisha/JumpingSpyder/actions/workflows/checks.yml"><img src="https://github.com/stefisha/JumpingSpyder/actions/workflows/checks.yml/badge.svg" alt="Checks"></a>
   <img src="https://img.shields.io/badge/python-3.9%2B-5cdb82?logo=python&logoColor=white" alt="Python 3.9 or newer">
   <img src="https://img.shields.io/badge/runtime_dependencies-0-5cdb82" alt="Zero third-party runtime dependencies">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
 </p>
-<p align="center"><a href="#try-it-in-two-minutes">Try the demo</a> · <a href="docs/architecture.md">Architecture</a> · <a href="docs/evaluation.md">Measured baseline</a> · <a href="docs/running.md">Run & configure</a> · <a href="docs/history.md">Project history</a></p>
+<p align="center"><a href="#landing-page">Landing page</a> · <a href="#try-it-in-two-minutes">Run the worker demo</a> · <a href="docs/architecture.md">Architecture</a> · <a href="docs/evaluation.md">Measured baseline</a> · <a href="docs/running.md">Run & configure</a> · <a href="docs/history.md">Project history</a></p>
 
-JumpingSpyder collects posts from X and upload metadata from YouTube, classifies the author's expressed market stance, and attaches a source excerpt to every result. A local HTML review report exposes the classification, risk flag, provenance, and delivery state. Optional Telegram delivery uses a persistent retry queue.
+JumpingSpyder pairs a public-facing landing page with a server-side social-monitoring service. The original alpha used n8n and a backend on Google Cloud to fetch tweets from a predefined account list, filter relevant posts, and send alerts to one shared Telegram chat.
 
-Originally built as **Jumpy**, a 2025 crypto-signal experiment, the project now has one maintained Python application. The recovered Node.js bot, Python worker, and n8n workflow remain in [`archive/`](archive/) as historical context.
+This repository contains the rebuilt landing page and one maintained Python worker with persisted classifications and Telegram retries. The recovered Node.js bot, Python prototype, and n8n workflow remain in [`archive/`](archive/). Individual bot messages and subscriber preferences remain future work.
 
-**Status:** tested offline application and mocked live-adapter contracts. Live provider behavior has not been verified with real credentials. Classifications describe source content; they do not establish trading profitability, scam-detection accuracy, or account authenticity. There is no trading execution or payment collection in the maintained application.
+## Landing page
+
+The [rebuilt website](web/landing/README.md) recreates the original Framer design with local artwork, DM Sans, responsive layouts, the hero entrance, phone tilt, partner ticker, and animated FAQs. Join Waitlist opens the original Google Form; Get the Alpha links to Jumpy on Telegram.
+
+<p align="center"><img src="docs/assets/landing-page-current.png" alt="Current rebuilt JumpingSpyder landing page with the Jumpy Telegram phone, Solflare card, visible +75% graphic, and original headline" width="100%"></p>
+
+Preview the website locally from the repository root:
+
+```sh
+python3 -m http.server 8766 --bind 127.0.0.1 --directory web/landing
+```
+
+Open [localhost:8766](http://127.0.0.1:8766/). The static website can be hosted separately from the worker. Its historical marketing artwork does not establish measured trading results or implemented trading controls.
+
+## Service
+
+The maintained worker collects posts from configured X accounts and upload metadata from YouTube, classifies the author's expressed market stance, and attaches a source excerpt to every result. It stores processing and delivery state in SQLite and retries failed Telegram sends. A separate local review report helps inspect classifications; it is an internal tool, not the public landing page.
+
+**Status:** offline application and mocked live-adapter contracts are tested. Live provider behavior has not been verified with real credentials or redeployed to GCP in this rebuild. There is no trading execution or payment collection in the maintained worker.
 
 ## Try it in two minutes
 
@@ -34,19 +52,7 @@ Open **`reports/demo/index.html`** in your browser. It is a self-contained snaps
 
 The demo supplies **nine records representing eight unique synthetic posts**. Four directional, unflagged items are reviewed locally; four neutral, conflicting, or flagged items are suppressed from alerts. Run it again to see deduplication: **zero new records and zero repeat deliveries**. “Delivered” in demo CLI output refers to the local review destination; no messages leave your machine.
 
-<p align="center"><img src="docs/assets/review-desktop.png" alt="Dark JumpingSpyder review desk showing source counts, searchable classifications, evidence excerpts, and review status" width="100%"></p>
-
-## The landing page
-
-The original product used a public landing page to introduce Jumpy and direct visitors to Telegram. The rebuilt [landing page](web/landing/README.md) preserves its dark/green identity and original artwork, with responsive navigation, a Telegram example, and keyboard-accessible FAQs.
-
-The original alpha delivered to one shared chat. Individual bot messages and subscriber preferences are planned features, not functionality supplied by the landing page. The Python worker and static website can be hosted separately.
-
-```sh
-python3 -m http.server 8766 --bind 127.0.0.1 --directory web/landing
-```
-
-<p align="center"><img src="docs/assets/landing-desktop.png" alt="Rebuilt JumpingSpyder landing page using the original green spider branding and Telegram hero artwork" width="100%"></p>
+See the worker’s separate [review-desk screenshot](docs/assets/review-desktop.png) for its source inspection and delivery controls.
 
 ## What the engineering demonstrates
 
@@ -72,7 +78,7 @@ On the included **24 author-labeled synthetic challenge cases**, `rules-v1` scor
 jumping-spyder evaluate
 ```
 
-See [evaluation methodology, confusion matrix, and known errors](docs/evaluation.md). There are no invented confidence percentages, return targets, or “historical accuracy” fields.
+See [evaluation methodology, confusion matrix, and known errors](docs/evaluation.md). The worker does not generate confidence percentages, return targets, or “historical accuracy” fields; the landing page preserves the original concept artwork.
 
 ## Import your own source records
 
