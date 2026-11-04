@@ -56,3 +56,9 @@ The database path is resolved before opening it and deriving its advisory lock, 
 ## Deliberate scope
 
 There is no always-on web server, multi-user authentication, subscription manager, Solana payment handling, order execution, transcript downloader, or market-data backtest. The report is an inspectable static snapshot. Live providers require their own credentials, account access, quotas, and separate end-to-end verification.
+
+## Landing page and Telegram interface
+
+The original product paired a Framer landing page with n8n orchestration and a backend on Google Cloud. The website introduced the project and directed visitors to the bot. Alpha alerts were delivered to one Telegram chat; individual bot messages were the intended next stage.
+
+The rebuilt static page is in `web/landing/`. It links to the original bot and preserves the historical marketing copy and illustrations; it does not register subscribers, call the worker, collect payments, or expose live results. It can run on a different host from the worker. Individual delivery needs subscriber records and per-recipient delivery state; the maintained worker currently targets one configured chat.

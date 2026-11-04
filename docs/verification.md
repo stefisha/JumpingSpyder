@@ -41,3 +41,9 @@ The adapters follow the documented REST formats; these links are reference contr
 - [X user posts](https://docs.x.com/x-api/users/get-posts)
 - [YouTube playlistItems.list](https://developers.google.com/youtube/v3/docs/playlistItems/list)
 - [Telegram sendMessage](https://core.telegram.org/bots/api#sendmessage)
+
+## Landing page checks
+
+The static landing page's JavaScript passes `node --check`. Local assets, unique HTML IDs, section targets, and Telegram destinations were checked. Browser checks cover desktop at 1280px and mobile at 390px/320px with no horizontal overflow, menu open/close, Escape handling, menu closure after navigation, and click/keyboard FAQ disclosure. All page images loaded. No live Telegram messages were sent. The original marketing copy and illustrative returns remain historical design material, not new backend verification. DM Sans loads locally. The hero entrance, 30° rotateX phone reveal, step/coin reveals, 60px/s partner ticker, FAQ height/fade animations, and reduced-motion behavior were checked. Footer social controls use the recovered SVG icons in 38px circles.
+
+Copilot review corrections add three Node regression tests for observer threshold/state behavior. Browser checks confirm hidden initial steps/coin, completed reveals, unchanged completed animation times during scrolling, a persistent keyboard ticker pause after focus moves away, visible inset FAQ focus, selected 480px mobile WebP sources, and reduced-motion restoration of all hidden content. The 480px hero payload is 222,562 bytes (92.7% below the original 3,048,722-byte set).

@@ -20,6 +20,10 @@ jobs:
           python-version: ${{ matrix.python }}
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m pip install -e . --no-build-isolation
+      - name: Check landing page JavaScript
+        run: |
+          node --check web/landing/app.js
+          node --test tests/landing-motion.test.mjs
       - run: make check
       - run: make package
       - name: Verify committed baseline matches reproducible evaluation
