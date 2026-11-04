@@ -36,6 +36,18 @@ The demo supplies **nine records representing eight unique synthetic posts**. Fo
 
 <p align="center"><img src="docs/assets/review-desktop.png" alt="Dark JumpingSpyder review desk showing source counts, searchable classifications, evidence excerpts, and review status" width="100%"></p>
 
+## The landing page
+
+The original product used a public landing page to introduce Jumpy and direct visitors to Telegram. The rebuilt [landing page](web/landing/README.md) preserves its dark/green identity and original artwork, with responsive navigation, a Telegram example, and keyboard-accessible FAQs.
+
+The original alpha delivered to one shared chat. Individual bot messages and subscriber preferences are planned features, not functionality supplied by the landing page. The Python worker and static website can be hosted separately.
+
+```sh
+python3 -m http.server 8766 --bind 127.0.0.1 --directory web/landing
+```
+
+<p align="center"><img src="docs/assets/landing-desktop.png" alt="Rebuilt JumpingSpyder landing page using the original green spider branding and Telegram hero artwork" width="100%"></p>
+
 ## What the engineering demonstrates
 
 | Concern                             | Implementation                                                                                                          |
@@ -88,6 +100,7 @@ src/jumping_spyder/    Maintained package and CLI
   data/               Packaged synthetic demo and evaluation cases
   templates/          Self-contained review interface
 examples/             Input examples
+web/landing/          Static public-facing landing page and local assets
 tests/               Regression and adapter-contract tests
 docs/                Architecture, configuration, evaluation, screenshots
 archive/             Historical implementations; not installed or maintained

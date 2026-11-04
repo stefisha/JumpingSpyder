@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#020710" />
+    <title>JumpingSpyder — Track Crypto Tweets. Act Before the Crowd.</title>
+    <meta
+      name="description"
+      content="When X Talks, We Already Know. You can too. JumpingSpyder filters crypto conversations and brings alerts to Telegram."
+    />
+    <link rel="icon" type="image/png" href="assets/jumpy.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="#" aria-label="JumpingSpyder home"
+          ><img
+            src="assets/wordmark.avif"
+            width="230"
+            height="42"
+            alt="JumpingSpyder"
+        /></a>
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="#why">Why</a><a href="#features">Features</a
+          ><a href="#how">How</a><a href="#trade">Trade</a
+          ><a href="#faq">FAQs</a>
+        </nav>
+        <a
+          class="button waitlist"
+          href="https://forms.gle/XivsuNZGuh3CKnFS7"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Join Waitlist</a
+        ><button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          aria-label="Open navigation"
+        >
+          <span></span><span></span>
+        </button>
+      </div>
+      <nav
+        id="mobile-nav"
+        class="mobile-nav"
+        aria-label="Mobile navigation"
+        hidden
+      >
+        <a href="#why">Why</a><a href="#features">Features</a
+        ><a href="#how">How</a><a href="#trade">Trade</a><a href="#faq">FAQs</a
+        ><a
+          href="https://forms.gle/XivsuNZGuh3CKnFS7"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Join Waitlist ↗</a
+        >
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero container" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow-pill">Future of crypto trading</div>
+          <h1 id="hero-title">
+            When X Talks,<br />We Already Know.<br />You can too
+          </h1>
+          <p class="hero-description">
+            We scan X so you don’t have to. All the crypto posts. Filtered and
+            only the pure alpha fired to your Telegram. So you can focus on
+            what's important, not on the scrolling.
+          </p>
+          <a
+            class="button"
+            href="https://t.me/jumpys_bot"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Get the Alpha</a
+          >
+        </div>
+        <div class="hero-art">
+          <img
+            class="hero-visual"
+            src="assets/hero-original.svg"
+            alt="A hand holding the Jumpy Telegram bot"
+            width="584"
+            height="582"
+            fetchpriority="high"
+          /><img
+            class="hero-phone-layer"
+            src="assets/jumpy-phone.png"
+            alt="Jumpy Telegram bot concept"
+          /><img
+            class="hero-card-layer"
+            src="assets/solflare-card-cutout.png"
+            alt="Solflare card concept"
+          />
+        </div>
+      </section>
+      <section class="partners container" aria-label="Partners">
+        <p>Special thanks to our <span class="green">partners</span></p>
+        <div class="partner-window">
+          <div class="partner-track">
+            <div class="partner-group">
+              <div>
+                <img
+                  src="assets/solana-foundation-logo.svg"
+                  alt="Solana Foundation"
+                />
+              </div>
+              <div>
+                <img class="blkn" src="assets/blkn-logo.svg" alt="BLKN" />
+              </div>
+            </div>
+            <div class="partner-group" aria-hidden="true">
+              <div><img src="assets/solana-foundation-logo.svg" alt="" /></div>
+              <div><img class="blkn" src="assets/blkn-logo.svg" alt="" /></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        id="why"
+        class="why-section container section-space"
+        aria-labelledby="why-title"
+      >
+        <div class="section-copy">
+          <p class="eyebrow">
+            Why choose <span class="green">JumpingSpyder</span>
+          </p>
+          <h2 id="why-title">Be the first one to hear about market shifts</h2>
+          <ul class="benefit-list">
+            <li>
+              <span class="icon-bubble"
+                ><img src="assets/link.svg" alt="" /></span
+              >Free to use, with Buy/Sell functionality
+            </li>
+            <li>
+              <span class="icon-bubble"
+                ><img src="assets/bolt.svg" alt="" /></span
+              >Telegram alerts, no delay
+            </li>
+            <li>
+              <span class="icon-bubble"
+                ><img src="assets/builders.svg" alt="" /></span
+              >Tracks Solana ecosystem influencers, devs &amp; builders
+            </li>
+            <li>
+              <span class="icon-bubble"
+                ><img src="assets/academy.svg" alt="" /></span
+              >Get notified when your bags are in danger
+            </li>
+          </ul>
+        </div>
+        <div class="portfolio-scene">
+          <img src="assets/market-lines.svg" class="market-lines" alt="" />
+          <div class="portfolio-card">
+            <h3>Your portfolio is up <span class="green">95.2%</span></h3>
+            <div class="coin-row">
+              <img src="assets/jupiter.webp" alt="" width="43" height="43" />
+              <div><strong>Jupiter</strong><span>JUP/USD</span></div>
+              <span class="return">+140% ↑</span>
+            </div>
+            <div class="coin-row">
+              <img src="assets/dogwifhat.webp" alt="" width="43" height="43" />
+              <div><strong>dogwifhat</strong><span>ETH/USD</span></div>
+              <span class="return">+120% ↑</span>
+            </div>
+            <div class="coin-row">
+              <img src="assets/bonk.webp" alt="" width="43" height="43" />
+              <div><strong>Bonk</strong><span>BONK/USD</span></div>
+              <span class="return">+85% ↑</span>
+            </div>
+            <div class="coin-row">
+              <img src="assets/pyth.webp" alt="" width="43" height="43" />
+              <div><strong>Pyth Network</strong><span>PYTH /USD</span></div>
+              <span class="return">+60% ↑</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stats container" aria-label="Features">
+        <div>
+          <h3>Fast AF</h3>
+          <p>Telegram alerts in<br />under 1 second</p>
+        </div>
+        <div>
+          <h3>24/7</h3>
+          <p>X/Twitter monitoring<br />– no sleep mode</p>
+        </div>
+        <div>
+          <h3>Global</h3>
+          <p>Waitlist includes<br />users worldwide</p>
+        </div>
+        <div>
+          <h3>Degen+</h3>
+          <p>Trade smart, not hard.<br />Win while you work</p>
+        </div>
+      </section>
+      <section
+        id="how"
+        class="how-section container section-space"
+        aria-labelledby="how-title"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">
+            Others talk.. <span class="green">we deliver.</span>
+          </p>
+          <h2 id="how-title">One bot. All the alpha. None of the noise.</h2>
+        </div>
+        <div class="how-grid">
+          <div class="steps-left">
+            <article class="step">
+              <span class="step-icon"
+                ><img src="assets/sniff.svg" alt=""
+              /></span>
+              <div>
+                <h3>Sniff</h3>
+                <p>
+                  JS scrapes X for dev leaks, influencer hints, and shady anon
+                  chatter.
+                </p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="step-icon"
+                ><img src="assets/filter.svg" alt=""
+              /></span>
+              <div>
+                <h3>Filter</h3>
+                <p>
+                  AI removes the noise. Only worthwhile signals make it through.
+                </p>
+              </div>
+            </article>
+          </div>
+          <div class="phone-scene">
+            <img class="orbit-art" src="assets/orbit.svg" alt="" />
+            <div class="phone-tilt">
+              <img
+                class="how-phone"
+                src="assets/jumpy-phone.png"
+                alt="Jumpy Telegram bot with an example signal and controls"
+              /><img
+                class="solana-coin"
+                src="assets/solana-coin.webp"
+                alt="Solana"
+              />
+            </div>
+          </div>
+          <div class="steps-right">
+            <article class="step">
+              <span class="step-icon"
+                ><img src="assets/alert.svg" alt=""
+              /></span>
+              <div>
+                <h3>Alert</h3>
+                <p>
+                  Telegram pings with real-time alpha you can act on. You ape in
+                  — or pull out — before CT notices.
+                </p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="step-icon"
+                ><img src="assets/profit.svg" alt=""
+              /></span>
+              <div>
+                <h3>Profit</h3>
+                <p>
+                  You’re not chasing pumps. You’re already out with bags packed.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section
+        id="trade"
+        class="features-section container section-space"
+        aria-labelledby="features-title"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">
+            Always in <span class="green">your pocket.</span>
+          </p>
+          <h2 id="features-title">Be First. Stay Sharp. Ape Smarter.</h2>
+          <p class="muted">
+            You don’t need another course. You need alpha, alerts, and the right
+            crew (Jumpy).
+          </p>
+        </div>
+        <div id="features" class="feature-panel">
+          <article>
+            <span class="feature-icon"
+              ><img src="assets/support.svg" alt=""
+            /></span>
+            <h3>Real-Time Signal Access</h3>
+            <p>
+              No noise, no delays. Get direct alerts from Twitter’s underground
+              before the charts even move.
+            </p>
+          </article>
+          <article>
+            <span class="feature-icon"
+              ><img src="assets/community.svg" alt=""
+            /></span>
+            <h3>User-friendly Design</h3>
+            <p>
+              You already have Telegram, join early testers and be able to get
+              the most impactful trading signals and help us polish up the
+              algorithm.
+            </p>
+          </article>
+          <article>
+            <span class="feature-icon"
+              ><img src="assets/academy.svg" alt=""
+            /></span>
+            <h3>Built for CT, Not Boomers</h3>
+            <p>
+              JumpingSpyder is battle-tested by traders, not designed by
+              consultants. Clean UI. Real results. No fluff.<br /><strong
+                >Get ready to win big!</strong
+              >
+            </p>
+          </article>
+          <img class="feature-wave" src="assets/wave-line.svg" alt="" />
+        </div>
+      </section>
+      <section
+        id="faq"
+        class="faq-section container section-space"
+        aria-labelledby="faq-title"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">Got <span class="green">questions?</span></p>
+          <h2 id="faq-title">Popular questions from future degens</h2>
+          <p class="muted">If you’re asking, you already missed the pump.</p>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>
+              Is this a paid service?<span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Access to information is free. If you want to get access to extra
+              features, you must subscribe to Pro.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Can I trust the signals?<span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Try them. You can access for free. If it sucks, you leave. If it
+              prints, you stay.
+            </p>
+          </details>
+          <details>
+            <summary>
+              What if I don’t use Telegram?<span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Then... you’re not really in crypto, are you? But sure, Discord
+              integration is coming.
+            </p>
+          </details>
+          <details>
+            <summary>
+              What about integrated trading?<span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              It will go through Juptier. We will charge a small swap fee for
+              the transactions.
+            </p>
+          </details>
+          <details>
+            <summary>
+              What kind of coins do you track?<span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              We track whatever’s trending. If it’s popping on X, we’ll find it.
+              On the Pro version you can filter specifically for the coins you
+              want to see only.
+            </p>
+          </details>
+          <details>
+            <summary>
+              How can I contact you?<span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Feel free to write to us directly at support@jumpingspyder.com
+            </p>
+          </details>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer container">
+      <div class="footer-about">
+        <a class="brand" href="#" aria-label="JumpingSpyder home"
+          ><img
+            src="assets/wordmark.avif"
+            width="230"
+            height="42"
+            alt="JumpingSpyder"
+        /></a>
+        <p>
+          At Jumpy we help you cut through social media noise to<br
+            class="desktop-break"
+          />
+          find opportunities and protect your assets.
+        </p>
+        <div class="socials">
+          <a
+            href="https://x.com/jumpingspyd3r"
+            aria-label="JumpingSpyder on X"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="rgb(255, 255, 255)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+              ></path></svg></a
+          ><a
+            href="https://www.instagram.com/jumping_spyder"
+            aria-label="JumpingSpyder on Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="rgb(255, 255, 255)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a
+          ><a
+            href="https://www.linkedin.com/company/jumping-spyder/"
+            aria-label="JumpingSpyder on LinkedIn"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="rgb(255, 255, 255)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+              ></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle></svg
+          ></a>
+        </div>
+      </div>
+      <nav aria-label="Footer navigation">
+        <span>Links</span><a href="#why">Why</a><a href="#how">How</a
+        ><a href="#features">Features</a><a href="#trade">Trade</a>
+      </nav>
+    </footer>
+  </body>
+</html>
