@@ -12,6 +12,8 @@
 
 JumpingSpyder pairs a public-facing landing page with a server-side social-monitoring service. The original alpha used n8n and a backend on Google Cloud to fetch tweets from a predefined account list, filter relevant posts, and send alerts to one shared Telegram chat.
 
+As co-founder, I was responsible for the application’s architecture, frontend, backend, deployment and maintenance. The project is now discontinued.
+
 This repository contains the rebuilt landing page and one maintained Python worker with persisted classifications and Telegram retries. The recovered Node.js bot, Python prototype, and n8n workflow remain in [`archive/`](archive/). Individual bot messages and subscriber preferences remain future work.
 
 ## Landing page
